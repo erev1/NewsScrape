@@ -19,6 +19,10 @@ var PORT = 3000;
 // Initialize Express
 var app = express();
 
+//if deployed, use deployed db, else us local db
+
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/ArticlesDB";
+
 // Configure middleware
 
 // Use morgan logger for logging requests
@@ -31,7 +35,7 @@ app.use(express.static("public"));
 // Set mongoose to leverage built in JavaScript ES6 Promises
 // Connect to the Mongo DB
 mongoose.Promise = Promise;
-mongoose.connect("mongodb://localhost/ArticlesDB", {
+mongoose.connect(MONGODB_URI, {
   useMongoClient: true
 });
 
