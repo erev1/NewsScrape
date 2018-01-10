@@ -20,6 +20,12 @@
     <ul class="nav navbar-nav">
       <li class="active"><a href="/">Home</a></li>
       <li><a href="/saved">Saved Articles</a></li>
+      <!--
+        Would be good to have the http request to /scrape made by ajax
+        instead of as an anchor tag. Going that route would also allow
+        you to show an alert that the articles were scraped instead of
+        taking the user to a new page that simply has the text: 'scrape completed'
+      -->
       <li><a class="btn btn-danger scrape-new" href="/scrape">SCRAPE NEW ARTICLES!</a></li>
     </ul>
   </div>

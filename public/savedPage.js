@@ -1,3 +1,5 @@
+// setting tempId to undefined is redundant since that's
+// what it will be if you just declare it like: `var tempId`
 var tempId = undefined
 
 $.getJSON("/articles/saved", function(data) {

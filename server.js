@@ -14,7 +14,10 @@ var cheerio = require("cheerio");
 // Require all models
 var db = require("./models");
 
-var PORT = 3000;
+// This is likely why your deployed version wasn't working. Heroku defines a different
+// PORT value for your server to listen on. So you need to first check for that environment
+// variable and then let 3000 be the default. Similar to what you're doing for MONGODB_URI
+var PORT = process.env.PORT || 3000;
 
 // Initialize Express
 var app = express();
@@ -153,6 +156,8 @@ app.get("/articles", function(req, res) {
     })
     .catch(function(err) {
       // If an error occurred, send it to the client
+      // Instead of just using the `.json` method to send the response, you might want
+      // to consider setting the status code to signal that this is an error response
       res.json(err);
     });
 });
@@ -190,7 +195,10 @@ app.get("/articles/:id", function(req, res) {
 
 
 //route for saving/unsaving a particular article
-
+// Since this route performs an update to an already existing article
+// you might want to consider making it a `PUT` instead of a `POST`.
+// Also, instead of passing the saved boolean as a url parameter
+// you should consider sending that update as part of the request body.
 app.post("/articles/save/:boolean/:id", function(req, res) {
   // Create a new note and pass the req.body to the entry
   db.Article
